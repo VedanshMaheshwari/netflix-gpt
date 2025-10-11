@@ -3,9 +3,12 @@
 - create vite@latest netflix-gpt
 - configured tailwindCSS
 - Header
+- Routing of App
 - Login Form
 - SignUp Form
--  
+- Form Validation
+- useRef Hook
+
 
 ## Features
 - Login/Sign Up 
