@@ -1,18 +1,15 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+
+import Body from './components/Body.jsx'
+import Header from './components/Header.jsx';
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <p className="text-3xl font-bold text-green-950">
-        Building Netflix-GPT!
-      </p>
+      <Body /> 
     </>
-  )
+  ) 
 }
 
-export default App
+export default App;
