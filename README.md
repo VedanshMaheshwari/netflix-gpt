@@ -1,14 +1,6 @@
-# NetflixGPT
-- create vite@latest netflix-gpt
-- configured Tailwind
-- Header
-- Login Form
-
-
-
+#Features
 
 ## Features
-
 - Login/Sign Up 
     - Sign In /Sign up Form
     - redirect to Browse Page
