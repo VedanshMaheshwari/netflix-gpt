@@ -63,7 +63,7 @@ const Login = () => {
                     <input type="checkbox" name="remember-me" id="" className="my-4" /> Remember me
                     <p>
                         <span className="text-gray-400"> {isSignInForm ? "New to Netflix?" : "Already an user?"} </span>
-                        <span className="font-bold text-shadow-white cursor-pointer" onClick={toggleSignInForm}>
+                        <span className="font-bold text-shadow-white cursor-pointer"    onClick={toggleSignInForm}>
                             {isSignInForm ? "Sign up now." : "Sign In now."}</span>
                     </p>
                     <p className="my-4 text-xs text-gray-500"> This page is protected by Google reCAPTCHA to ensure you're not a bot.</p>
