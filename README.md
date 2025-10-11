@@ -1,4 +1,11 @@
-#Features
+# NetflixGPT
+
+- create vite@latest netflix-gpt
+- configured tailwindCSS
+- Header
+- Login Form
+- SignUp Form
+-  
 
 ## Features
 - Login/Sign Up 
