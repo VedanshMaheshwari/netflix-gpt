@@ -1,10 +1,12 @@
 import React, { useState, useRef }  from "react";
 import Header from '../components/Header.jsx';
 import { checkValidData } from '../utils/validate.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+
+import {auth} from '../utils/firebase.js';
 
 const Login = () => {
     const [isSignInForm, setSignInForm] = useState(true);
-    //const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [isValid, setIsValid] = useState(null);
@@ -15,6 +17,8 @@ const Login = () => {
 
     // USING useRef() to get email input value
     const email = useRef(null);
+    const name = useRef(null);
+
 
     const validateForm = (e) => {
         e.preventDefault();
@@ -22,6 +26,42 @@ const Login = () => {
         setIsValid(result.valid);
         setError(result.valid ? "" : result.message);
         // Proceed with sign in logic if result.valid
+        console.log("Validation Result:", result);
+        
+        if(!result.valid){
+            return; 
+        }
+            // if(result === null ){
+            //create a new user
+            //sign in/ signup user
+            
+            //for sign up
+            if(!isSignInForm){
+                createUserWithEmailAndPassword(auth, email.current.value, password)
+                    .then((userCredential) => {
+                    // Signed up 
+                    const user = userCredential.user;
+                    console.log("User signed up:", user);
+                })
+                .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setError(errorCode + "-" + errorMessage);    
+                });
+            }
+            else{
+                signInWithEmailAndPassword(auth, email.current.value, password)
+                .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log("User signed in:", user);
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setError(errorCode + "-" + errorMessage);    
+                });
+            }
     };
 
     return(
@@ -32,19 +72,22 @@ const Login = () => {
             </div>
 
             <div className="absolute top-0 left-0 right-0 z-20 flex justify-center items-center">
-                <form className="w-4/14 p-12 bg-black/70 my-30 mx-auto text-white " onSubmit={validateForm}>
+                <form className="w-4/14 p-12 bg-black/70 my-30 mx-auto text-white " onSubmit={validateForm}> 
                     <h1 className="font-bold text-3xl py-4">{isSignInForm ? "Sign In" : "Sign Up"}</h1>
+                    
                     {isSignInForm ? null : 
-                        <input type="text" placeholder=" Full Name"
+                        <input 
+                            type="text" 
+                            placeholder=" Full Name"
+                            ref={name}
                         className="p-4 my-2.5 w-full border border-gray-300 rounded-md bg-black/75 text-white" />
                     }
+
                     <input 
                         ref = {email}
                         type="text" 
                         placeholder=" Email Address" 
                         className="p-4 my-2.5 w-full border border-gray-300 rounded-md bg-black/75 text-white"
-                        // value={email}
-                        // onChange={e => setEmail(e.target.value)}
                     />
                     <input 
                         type="password" 
