@@ -1,13 +1,15 @@
 import { useState } from 'react'
+import { Provider } from 'react-redux';
 
 import Body from './components/Body.jsx'
 import Header from './components/Header.jsx';
+import appStore from './utils/appStore.js';
 
 
 function App() {
   return (
     <>
-      <Body /> 
+      <Provider store={appStore}><Body /></Provider> 
     </>
   ) 
 }

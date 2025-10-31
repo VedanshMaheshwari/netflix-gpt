@@ -10,7 +10,8 @@
 - useRef Hook
 - Firebase setup
 - deploying our app to production
-- create sign up user account
+- create sign up/ sign in user account
+- created redux store with userSlice    
 
 
 ## Features
