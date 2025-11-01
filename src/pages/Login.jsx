@@ -1,4 +1,5 @@
 import React, { useState, useRef }  from "react";
+import { useNavigate } from "react-router-dom";
 import Header from '../components/Header.jsx';
 import { checkValidData } from '../utils/validate.js';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
@@ -6,6 +7,11 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } f
 import {auth} from '../utils/firebase.js';
 
 const Login = () => {
+    const navigate = useNavigate();
+    // USING useRef() to get email input value
+    const email = useRef(null);
+    const name = useRef(null);
+
     const [isSignInForm, setSignInForm] = useState(true);
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -14,11 +20,6 @@ const Login = () => {
     const toggleSignInForm = () => {
         setSignInForm(!isSignInForm);
     };
-
-    // USING useRef() to get email input value
-    const email = useRef(null);
-    const name = useRef(null);
-
 
     const validateForm = (e) => {
         e.preventDefault();
@@ -42,11 +43,12 @@ const Login = () => {
                     // Signed up 
                     const user = userCredential.user;
                     console.log("User signed up:", user);
-                })
-                .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                setError(errorCode + "-" + errorMessage);    
+                    navigate("/Browse");
+                    })
+                    .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setError(errorCode + "-" + errorMessage);  
                 });
             }
             else{
@@ -55,6 +57,7 @@ const Login = () => {
                 // Signed in 
                 const user = userCredential.user;
                 console.log("User signed in:", user);
+                navigate("/Browse");
                 })
                 .catch((error) => {
                     const errorCode = error.code;
