@@ -12,7 +12,9 @@
 - deploying our app to production
 - create sign up/ sign in user account
 - created redux store with userSlice    
+- implemented signOut
 - update profile
+- fetch movie from TMDB
 
 
 ## Features
